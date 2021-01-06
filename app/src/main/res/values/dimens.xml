@@ -1,2 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <dimen name="margin_start_guide">18dp</dimen>
+    <dimen name="margin_end_guide">18dp</dimen>
+</resources>

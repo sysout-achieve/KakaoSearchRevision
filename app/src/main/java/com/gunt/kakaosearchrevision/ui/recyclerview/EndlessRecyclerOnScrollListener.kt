@@ -1,12 +1,12 @@
-package com.gunt.kakaosearchrevision.ui.util
+package com.gunt.kakaosearchrevision.ui.recyclerview
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 
-abstract class EndlessRecyclerOnScrollListener : RecyclerView.OnScrollListener() {
-    private var mPreviousTotal = 0
-    private var mLoading = true
+abstract class EndlessRecyclerOnScrollListener (private val endlessCnt:Int): RecyclerView.OnScrollListener() {
+    private var previousTotal = 0
+    private var loading = true
 
     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
         super.onScrolled(recyclerView, dx, dy)
@@ -15,18 +15,19 @@ abstract class EndlessRecyclerOnScrollListener : RecyclerView.OnScrollListener()
         val totalItemCount = recyclerView.layoutManager!!.itemCount
         val firstVisibleItem = (recyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
         if (visibleItemCount == 0) {
-            mPreviousTotal = 0
+            previousTotal = 0
         }
-        if (mLoading) {
-            if (totalItemCount > mPreviousTotal) {
-                mLoading = false
-                mPreviousTotal = totalItemCount
+        if (loading) {
+            if (totalItemCount > previousTotal) {
+                loading = false
+                previousTotal = totalItemCount
             }
         }
-        val visibleThreshold = 5
-        if (!mLoading && totalItemCount - visibleItemCount <= firstVisibleItem + visibleThreshold) {
+        val visibleThreshold = endlessCnt
+        if (!loading && totalItemCount - visibleItemCount <= firstVisibleItem + visibleThreshold) {
+
             onLoadMore()
-            mLoading = true
+            loading = true
         }
     }
 

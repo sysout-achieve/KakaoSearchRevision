@@ -1,4 +1,4 @@
-package com.gunt.kakaosearchrevision.api
+package com.gunt.kakaosearchrevision.repository.api
 
 import com.gunt.kakaosearchrevision.BuildConfig
 import retrofit2.Retrofit

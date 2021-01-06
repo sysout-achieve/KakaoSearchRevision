@@ -1,4 +1,4 @@
-package com.gunt.kakaosearchrevision.api
+package com.gunt.kakaosearchrevision.repository.api
 
 import com.gunt.kakaosearchrevision.data.ResultBook
 import retrofit2.Call
@@ -13,7 +13,7 @@ interface  BooksApiService {
         @Query("query") keyword: String,
         @Query("sort") sort: String = "accuracy",
         @Query("page") page: Int,
-        @Query("size") size: Int = 50
+        @Query("size") size: Int
     ): Call<ResultBook>
 
 
