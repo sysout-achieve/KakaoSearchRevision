@@ -43,6 +43,7 @@ MVP와 차이점
 : MVP패턴의 경우 View와 Model간의 상호작용을 Presenter를 매개로 동작
 
 - Presenter와 View간의 loose coupling을 위한 interface구성
+- MVP: Presenter와 View가 서로를 바라보고 기능 수행 vs MVVM: ViewModel은 데이터 변형과 비즈니스 로직에 대한 처리 + View는 화면의 IO만 관리하고 ViewModel을 관찰
 
 <br>
 
