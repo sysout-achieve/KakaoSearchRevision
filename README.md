@@ -7,7 +7,7 @@ kakao 도서 검색 프로젝트
 - Language : Kotlin <br>
 - DI : Hilt <br>
 - AAC(MVVM, DataBinding, LiveData) <br>
-- Opensource: RxKotlin, RxBinding, Retrofit, Glide <br>
+- Opensource: RxKotlin, RxBinding, Retrofit, Glide, Swiperefreshlayout <br>
 
 <br>
 <hr>
