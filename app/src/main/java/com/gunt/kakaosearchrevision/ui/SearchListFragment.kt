@@ -18,12 +18,16 @@ import com.gunt.kakaosearchrevision.data.BookDTO
 import com.gunt.kakaosearchrevision.databinding.FragmentSearchListBinding
 import com.gunt.kakaosearchrevision.ui.recyclerview.EndlessRecyclerOnScrollListener
 import com.gunt.kakaosearchrevision.ui.recyclerview.OnRecyclerViewClickListener
+import com.gunt.kakaosearchrevision.ui.viewutil.SwipeRefreshTheme
+import com.gunt.kakaosearchrevision.ui.viewutil.setIndicatorColor
 import com.jakewharton.rxbinding4.widget.textChanges
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.kotlin.subscribeBy
 import io.reactivex.rxjava3.schedulers.Schedulers
+import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers.IO
 import java.util.concurrent.TimeUnit
 
 const val REQUEST_ENDLESS_CNT: Int = 10
@@ -32,11 +36,10 @@ const val REQUEST_ENDLESS_CNT: Int = 10
 class SearchListFragment : Fragment() {
 
     private lateinit var binding: FragmentSearchListBinding
-
+    private lateinit var communicator: Communicator
     private val viewModel: SearchListViewModel by viewModels()
 
-    private lateinit var communicator: Communicator
-
+    //구독하고 있는 Disposable 객체 일괄 관리하기 위한 객체(리소스 일괄 제어)
     private var compositeDisposable = CompositeDisposable()
 
     private var recyclerViewClickListener = object : OnRecyclerViewClickListener<BookDTO> {
@@ -47,22 +50,30 @@ class SearchListFragment : Fragment() {
         }
     }
 
-    private var recyclerViewEndScrollListener = object : EndlessRecyclerOnScrollListener(REQUEST_ENDLESS_CNT) {
-        override fun onLoadMore() {
-            binding.viewModel?.callMoreSearchBooksList()
+    private var recyclerViewEndScrollListener =
+        object : EndlessRecyclerOnScrollListener(REQUEST_ENDLESS_CNT) {
+            override fun onLoadMore() {
+                binding.viewModel?.callMoreSearchBooksList()
+            }
         }
-    }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         communicator = activity as Communicator
 
-        binding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_search_list, container, false)
+        binding =
+            DataBindingUtil.inflate(layoutInflater, R.layout.fragment_search_list, container, false)
         binding.setVariable(BR.viewModel, viewModel)
         binding.executePendingBindings()
-        setupSearchEditTextChangeListener()
         setupBinding()
         setupEndScrollListener()
         setupRecyclerViewItemClickListener()
+        setupSwipeRefresh()
+        setupSearchEditTextChangeListener()
+
         val view = binding.root
 
         binding.lifecycleOwner = this
@@ -79,26 +90,28 @@ class SearchListFragment : Fragment() {
     }
 
     override fun onDestroyView() {
+        //화면 종료 시 Disposable 탐색 해제
         compositeDisposable.clear()
         super.onDestroyView()
     }
 
+    //자동 검색 기능 추가, 버튼 누르지 않고 검색
     private fun setupSearchEditTextChangeListener() {
         val subscription: Disposable =
-                binding.editSearch.textChanges().debounce(200, TimeUnit.MILLISECONDS)
-                        .subscribeOn(Schedulers.io())
-                        .subscribeBy(
-                                onNext = {
-                                    viewModel.callSearchBooksList()
-                                    Log.d("RX", "onNext $it")
-                                },
-                                onComplete = {
-                                    Log.d("RX", "onComplete")
-                                },
-                                onError = {
-                                    Log.d("RX", "onError : $it")
-                                }
-                        )
+            binding.editSearch.textChanges().debounce(200, TimeUnit.MILLISECONDS)
+                .subscribeOn(Schedulers.io())
+                .subscribeBy(
+                    onNext = {
+                        viewModel.callSearchBooksList()
+                        Log.d("kakao RX", "onNext $it")
+                    },
+                    onComplete = {
+                        Log.d("kakao RX", "onComplete")
+                    },
+                    onError = {
+                        Log.d("kakao RX", "onError : $it")
+                    }
+                )
         compositeDisposable.add(subscription)
     }
 
@@ -116,5 +129,15 @@ class SearchListFragment : Fragment() {
 
     private fun setupEndScrollListener() {
         binding.recyclerView.addOnScrollListener(recyclerViewEndScrollListener)
+    }
+
+    private fun setupSwipeRefresh() {
+        binding.layoutSwipeRefresh.setIndicatorColor(SwipeRefreshTheme.MAIN)
+        binding.layoutSwipeRefresh.setOnRefreshListener {
+            CoroutineScope(IO).launch {
+                viewModel.callSearchBooksList()
+                binding.layoutSwipeRefresh.isRefreshing = false
+            }
+        }
     }
 }

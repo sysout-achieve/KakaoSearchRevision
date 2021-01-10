@@ -1,6 +1,5 @@
 package com.gunt.kakaosearchrevision.ui
 
-import android.graphics.Paint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import com.gunt.kakaosearchrevision.R
 import com.gunt.kakaosearchrevision.data.BookDTO
 import com.gunt.kakaosearchrevision.databinding.FragmentBookDetailBinding
+import com.gunt.kakaosearchrevision.ui.viewutil.scratchText
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -26,9 +26,10 @@ class BookDetailFragment : Fragment() {
         val view = binding.root
         val bookDTO: BookDTO? = arguments?.getSerializable("book") as BookDTO
         binding.bookDetail = bookDTO
-        binding.tvPrice.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
 
-        binding.imgClose.setOnClickListener { this.activity?.supportFragmentManager?.popBackStack() }
+        binding.tvPrice.scratchText()
+
+        binding.imgClose.setOnClickListener { this.activity?.onBackPressed() }
 
         return view
     }

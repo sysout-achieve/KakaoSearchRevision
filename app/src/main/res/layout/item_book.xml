@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    >
+    xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
             name="tempBook"
@@ -34,12 +33,13 @@
             android:layout_marginBottom="18dp"
             android:orientation="vertical">
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-black"
                 android:maxLines="2"
+                android:textSize="24sp"
                 android:text='@{tempBook.title}'
                 tools:text="TextView" />
 
@@ -49,6 +49,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:maxLines="3"
+                android:textSize="14sp"
                 android:text='@{tempBook.contents}'
                 tools:text="TextView" />
         </LinearLayout>

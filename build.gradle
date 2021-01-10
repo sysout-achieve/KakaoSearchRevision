@@ -14,14 +14,17 @@ buildscript {
         roomVersion = '2.2.5'
         retrofitVersion = '2.9.0'
         gsonVersion = '2.9.0'
-        // testing
-        junitVersion = '4.13.1'
-        espressoVersion = '3.1.0'
-        androidxJunitVersion = '1.1.2'
         rxJavaVersion = '3.0.9'
         rxKotlinVersion = '3.0.0'
         rxAndroidVersion = '3.0.0'
         rxBindingVersion = '4.0.0'
+        // testing
+        junitVersion = '4.13.1'
+        junitRunnerVersion = '1.1.0'
+        testFragmentVersion = '1.2.5'
+        espressoVersion = '3.1.0'
+        androidxJunitVersion = '1.1.2'
+
     }
     repositories {
         google()

@@ -1,5 +1,7 @@
 package com.gunt.kakaosearchrevision.data
 
+
+//Entity class로 만들어져야 할 클래스로 판단하여 따로 파일을 나눔
 data class Book(
     val authors: ArrayList<String>,
     val contents: String,
