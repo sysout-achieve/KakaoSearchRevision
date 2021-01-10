@@ -68,7 +68,15 @@ MVP와 차이점
 ### DataBinding, LiveData
   Kotlin extensions가 deprecated될 예정으로 DataBinding과 ViewBinding이 더 자주 사용될 예정 - [Link](https://android-developers.googleblog.com/2020/11/the-future-of-kotlin-android-extensions.html)
   
-  DataBinding을 사용하면 ViewModel과 뷰컴포넌트 객체를 연결지어주는 클래스를 generate하게 된다. 
-  ViewModel의 데이터 변화를 View에 notify()하는 구조로 generate하기 때문에 ViewModel과 xml을 연결시켜주는 것만으로 개발자가 직접 activity 소스에 변경된 데이터에 대한 행동을 작성할 필요없이 xml과 ViewModel만으로 관리할 수 있게 된다.
+DataBinding을 사용하면 ViewModel과 뷰컴포넌트 객체를 연결지어주는 클래스를 generate함 <br>
+ViewModel의 데이터 변화를 View에 notify()하는 구조로 code를 generate함 <br>
+ViewModel과 xml을 연결시켜주는 것만으로 개발자가 직접 activity 소스에 변경된 데이터에 대한 행동을 작성할 필요없이 xml과 ViewModel만으로 관리할 수 있게 됨
+
+LiveData
+  : LiveData로 관찰하고자 하는 객체를 wrapping -> 객체의 변화를 View에서 관찰하여 그에 맞는 액션을 취할 수 있게 만들어짐
+  (구조) Binding된 LiveData 객체가 가진 observe를 Activity에서 선언하여 화면에서 LiveData를 관찰, lifeCycle까지 Activity에서 관리할 수 있음
   
 
+  <br>
+  <hr>
+  
