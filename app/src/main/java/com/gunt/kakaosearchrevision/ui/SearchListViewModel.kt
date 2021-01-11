@@ -1,6 +1,7 @@
 package com.gunt.kakaosearchrevision.ui
 
 import android.util.Log
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.gunt.kakaosearchrevision.repository.api.BooksApiService
@@ -51,7 +52,6 @@ class SearchListViewModel : ViewModel() {
             callApiBooks()
         } catch (e: Exception) {
             Log.e("kakao eLog", e.message.toString())
-
         }
     }
 
