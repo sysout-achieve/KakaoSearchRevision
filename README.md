@@ -14,7 +14,7 @@ kakao 도서 검색 프로젝트
 <br>
 
 ## 목표
-- 이전에 수행했던 과제를 다시 수행해보며 개인적으로 공부했던 내용들을 적용 및 정리
+- 간단한 입출력 프로젝트를 수행해보며 개인적으로 공부했던 내용들을 적용 및 정리
 - **어떤 근거로 적용했는지, 장단점은 무엇인지, 다른 대안과의 비교, 앞으로 어떤 방향으로 개발할 것인지 고민**
 - 정리 도중에 추가로 적용하거나 개선할 부분들을 찾아 Refactoring -> Refactoring을 통해 얻은 효과가 무엇인지 추가로 정리
 - 디자인 패턴에 집중하는 것이 아니라 객체 지향에 집중할 것(디자인 패턴은 객체지향을 위한 도구)
@@ -74,7 +74,7 @@ ViewModel과 xml을 연결시켜주는 것만으로 개발자가 직접 activity
 
 LiveData
   : LiveData로 관찰하고자 하는 객체를 wrapping -> 객체의 변화를 View에서 관찰하여 그에 맞는 액션을 취할 수 있게 만들어짐
-  (구조) Binding된 LiveData 객체가 가진 observe를 Activity에서 선언하여 화면에서 LiveData를 관찰, lifeCycle까지 Activity에서 관리할 수 있음
+  (구조) Binding된 LiveData 객체가 가진 observe를 Activity에서 선언하여 화면에서 LiveData를 관찰, lifeCycle까지 Activity에서 관리할 수 있음  
   
 
   <br>
