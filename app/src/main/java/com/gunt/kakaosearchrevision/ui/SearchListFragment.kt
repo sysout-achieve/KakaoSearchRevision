@@ -14,8 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
 import com.gunt.kakaosearchrevision.BR
 import com.gunt.kakaosearchrevision.R
-import com.gunt.kakaosearchrevision.data.BookDTO
 import com.gunt.kakaosearchrevision.databinding.FragmentSearchListBinding
+import com.gunt.kakaosearchrevision.domain.data.Book
 import com.gunt.kakaosearchrevision.ui.recyclerview.EndlessRecyclerOnScrollListener
 import com.gunt.kakaosearchrevision.ui.recyclerview.OnRecyclerViewClickListener
 import com.gunt.kakaosearchrevision.ui.viewutil.SwipeRefreshTheme
@@ -26,8 +26,6 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.kotlin.subscribeBy
 import io.reactivex.rxjava3.schedulers.Schedulers
-import kotlinx.coroutines.*
-import kotlinx.coroutines.Dispatchers.IO
 import java.util.concurrent.TimeUnit
 
 const val REQUEST_ENDLESS_CNT: Int = 10
@@ -42,8 +40,8 @@ class SearchListFragment : Fragment() {
     //구독하고 있는 Disposable 객체 일괄 관리하기 위한 객체(리소스 일괄 제어)
     private var compositeDisposable = CompositeDisposable()
 
-    private var recyclerViewClickListener = object : OnRecyclerViewClickListener<BookDTO> {
-        override fun onRecyclerViewClickListener(item: BookDTO) {
+    private var recyclerViewClickListener = object : OnRecyclerViewClickListener<Book> {
+        override fun onRecyclerViewClickListener(item: Book) {
             val bundle = Bundle()
             bundle.putSerializable("book", item)
             communicator.passData(bundle)
@@ -53,7 +51,7 @@ class SearchListFragment : Fragment() {
     private var recyclerViewEndScrollListener =
         object : EndlessRecyclerOnScrollListener(REQUEST_ENDLESS_CNT) {
             override fun onLoadMore() {
-                binding.viewModel?.callMoreSearchBooksList()
+                binding.viewModel?.onTriggerEvent(BookListEvent.NextPageEvent)
             }
         }
 
@@ -78,12 +76,12 @@ class SearchListFragment : Fragment() {
 
         binding.lifecycleOwner = this
 
-        viewModel.getBooksDataObserver().observe(this.viewLifecycleOwner, Observer {
-            viewModel.setBooksDataAdapter(it)
+        viewModel.getLoading().observe(this.viewLifecycleOwner, Observer {
+            binding.layoutSwipeRefresh.isRefreshing = it
         })
 
         binding.btnSearch.setOnClickListener {
-            viewModel.callSearchBooksList()
+            viewModel.onTriggerEvent(BookListEvent.NewSearchEvent)
         }
 
         return view
@@ -102,7 +100,7 @@ class SearchListFragment : Fragment() {
                 .subscribeOn(Schedulers.io())
                 .subscribeBy(
                     onNext = {
-                        viewModel.callSearchBooksList()
+                        viewModel.onTriggerEvent(BookListEvent.NewSearchEvent)
                         Log.d("kakao RX", "onNext $it")
                     },
                     onComplete = {
@@ -134,10 +132,7 @@ class SearchListFragment : Fragment() {
     private fun setupSwipeRefresh() {
         binding.layoutSwipeRefresh.setIndicatorColor(SwipeRefreshTheme.MAIN)
         binding.layoutSwipeRefresh.setOnRefreshListener {
-            CoroutineScope(IO).launch {
-                viewModel.callSearchBooksList()
-                binding.layoutSwipeRefresh.isRefreshing = false
-            }
+            viewModel.onTriggerEvent(BookListEvent.NewSearchEvent)
         }
     }
 }

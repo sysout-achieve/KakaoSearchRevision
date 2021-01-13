@@ -1,103 +1,96 @@
 package com.gunt.kakaosearchrevision.ui
 
-import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.gunt.kakaosearchrevision.repository.api.BooksApiService
-import com.gunt.kakaosearchrevision.repository.api.RetrofitApi
-import com.gunt.kakaosearchrevision.data.ResultBook
+import androidx.lifecycle.*
+import com.gunt.kakaosearchrevision.domain.data.Book
+import com.gunt.kakaosearchrevision.repository.BookRepository
 import com.gunt.kakaosearchrevision.ui.recyclerview.BooksListAdapter
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import kotlinx.coroutines.launch
 import kotlin.Exception
 
-const val REQUEST_BOOK_LIST_SIZE: Int = 50
-
-class SearchListViewModel : ViewModel() {
+class SearchListViewModel
+@ViewModelInject
+constructor(
+    private val bookRepository: BookRepository
+) : ViewModel() {
     var booksListAdapter = BooksListAdapter()
 
     var searchTxtStr = ""
-    private var resultBook: MutableLiveData<ResultBook?> = MutableLiveData()
+    var currentPage = 1
+    private var responseBook: List<Book> = listOf()
 
-    private var currentPage = 0
     private var is_end = false
+    private var loading = MutableLiveData(false)
 
-
-    private fun callApiBooks(){
-        val retrofit = RetrofitApi.getRetrofitInstance().create(BooksApiService::class.java)
-        retrofit.requestSearchBook(keyword = searchTxtStr, page = ++currentPage, size = REQUEST_BOOK_LIST_SIZE)
-                .enqueue(object : Callback<ResultBook> {
-                    override fun onFailure(call: Call<ResultBook>, t: Throwable) {
-                        clearCurrentResultList()
+    fun onTriggerEvent(event: BookListEvent) {
+        viewModelScope.launch {
+            try {
+                when (event) {
+                    is BookListEvent.NewSearchEvent -> {
+                        newSearch()
                     }
-
-                    override fun onResponse(call: Call<ResultBook>, response: Response<ResultBook>) {
-                        if (response.isSuccessful) {
-                            //만약 null일 경우 is_end변수를 true로 만들어서 현재 검색한 내용의 endlessScroll(다음 페이지검색) 기능 막음
-                            is_end = response.body()?.isEnd() ?: true
-                            resultBook.postValue(response.body())
-                        } else {
-                            clearCurrentResultList()
-                        }
+                    is BookListEvent.NextPageEvent -> {
+                        nextPage()
                     }
-                })
+                    is BookListEvent.RestoreStateEvent -> {
+                    }
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
     }
 
-    fun callSearchBooksList() {
+    private suspend fun newSearch() {
         try {
-            emptyText()
-            firstPage()
-            callApiBooks()
+            loading.value = true
+            resetSearchState()
+            val result = bookRepository.searchBooks(keyword = searchTxtStr, page = currentPage)
+            responseBook = result
+            booksListAdapter.clearData()
+            booksListAdapter.setDataList(responseBook)
         } catch (e: Exception) {
-            Log.e("kakao eLog", e.message.toString())
+
         }
+        loading.value = false
     }
 
-    fun callMoreSearchBooksList() {
-        if (is_end) return
-        if (booksListAdapter.itemCount < 10) return
-        try {
-            emptyText()
-            callApiBooks()
-        } catch (e: Exception) {
-            Log.e("kakao eLog", e.message.toString())
-        }
+    private suspend fun nextPage() {
+        loading.value = true
+        incrementPage()
+
+        val result = bookRepository.searchBooks(keyword = searchTxtStr, page = currentPage)
+        appendBooks(result)
+        loading.value = false
     }
 
-    private fun firstPage() {
-        currentPage = 0
-        clearCurrentResultList()
+    private fun appendBooks(books: List<Book>) {
+        val current = ArrayList(this.responseBook)
+        current.addAll(books)
+        this.responseBook = current
+        booksListAdapter.setDataList(current)
     }
 
-    private fun emptyText() {
-        if (searchTxtStr == "") {
-            is_end = true
-            clearCurrentResultList()
-            throw Exception("Empty Text")
-        }
+    private fun incrementPage() {
+        setPage(currentPage + 1)
     }
 
-    fun getBooksDataObserver(): MutableLiveData<ResultBook?> {
-        return resultBook
+    private fun resetSearchState() {
+        is_end = false
+        responseBook = listOf()
+        setPage(1)
     }
 
-    fun setBooksDataAdapter(data: ResultBook?) {
-        booksListAdapter.setDataList(data)
+    private fun setPage(page: Int) {
+        this.currentPage = page
+    }
+
+    fun getLoading(): MutableLiveData<Boolean> {
+        return loading
     }
 
     fun getAdapter(): BooksListAdapter {
         return booksListAdapter
-    }
-
-    private fun clearCurrentResultList() {
-        booksListAdapter.dataListClear()
-        postEmptyValue()
-    }
-
-    private fun postEmptyValue() {
-        resultBook.postValue(null)
     }
 
 }

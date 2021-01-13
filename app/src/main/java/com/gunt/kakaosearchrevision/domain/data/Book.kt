@@ -1,7 +1,9 @@
-package com.gunt.kakaosearchrevision.data
+package com.gunt.kakaosearchrevision.domain.data
+
+import java.io.Serializable
 
 
-//Entity class로 만들어져야 할 클래스로 판단하여 따로 파일을 나눔
+//Domain class 로 만들어져야 할 클래스로 판단하여 따로 파일을 나눔
 data class Book(
     val authors: ArrayList<String>,
     val contents: String,
@@ -15,5 +17,5 @@ data class Book(
     val title: String,
     val translators: ArrayList<String>,
     val url: String
-)
+) :Serializable
 

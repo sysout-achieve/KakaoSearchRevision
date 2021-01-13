@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.gunt.kakaosearchrevision.R
-import com.gunt.kakaosearchrevision.data.BookDTO
 import com.gunt.kakaosearchrevision.databinding.FragmentBookDetailBinding
+import com.gunt.kakaosearchrevision.domain.data.Book
 import com.gunt.kakaosearchrevision.ui.viewutil.scratchText
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -24,8 +24,8 @@ class BookDetailFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_book_detail, container, false)
         val view = binding.root
-        val bookDTO: BookDTO? = arguments?.getSerializable("book") as BookDTO
-        binding.bookDetail = bookDTO
+        val book: Book? = arguments?.getSerializable("book") as Book
+        binding.bookDetail = book
 
         binding.tvPrice.scratchText()
 

@@ -3,25 +3,23 @@ package com.gunt.kakaosearchrevision.ui.recyclerview
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.gunt.kakaosearchrevision.data.BookDTO
-import com.gunt.kakaosearchrevision.data.ResultBook
+import com.gunt.kakaosearchrevision.repository.api.model.BookDto
+import com.gunt.kakaosearchrevision.repository.api.response.ResponseBook
 import com.gunt.kakaosearchrevision.databinding.ItemBookBinding
+import com.gunt.kakaosearchrevision.domain.data.Book
 import kotlin.collections.ArrayList
 
 class BooksListAdapter : RecyclerView.Adapter<BooksListAdapter.BookViewHolder>() {
-    private var items = ArrayList<BookDTO>()
-    private var recyclerViewClickListener: OnRecyclerViewClickListener<BookDTO>? = null
+    private var items = ArrayList<Book>()
+    private var recyclerViewClickListener: OnRecyclerViewClickListener<Book>? = null
 
-    fun setDataList(data: ResultBook?) {
-        this.items.addAll(data?.documents ?: ArrayList())
+    fun setDataList(data: List<Book>) {
+        this.items.addAll(data)
         notifyDataSetChanged()
     }
 
-    fun dataListClear() {
-        items.clear()
-    }
 
-    fun setRecyclerClickListener(recyclerClickListener: OnRecyclerViewClickListener<BookDTO>) {
+    fun setRecyclerClickListener(recyclerClickListener: OnRecyclerViewClickListener<Book>) {
         recyclerViewClickListener = recyclerClickListener
     }
 
@@ -40,9 +38,13 @@ class BooksListAdapter : RecyclerView.Adapter<BooksListAdapter.BookViewHolder>()
         }
     }
 
+    fun clearData() {
+        items.clear()
+    }
+
     class BookViewHolder(private val binding: ItemBookBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(data: BookDTO) {
+        fun bind(data: Book) {
             binding.tempBook = data
             binding.executePendingBindings()
         }
