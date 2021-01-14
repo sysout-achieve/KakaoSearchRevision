@@ -1,15 +1,14 @@
 package com.gunt.kakaosearchrevision.di
 
 import com.gunt.kakaosearchrevision.BuildConfig
-import com.gunt.kakaosearchrevision.repository.api.BooksService
-import com.gunt.kakaosearchrevision.repository.api.model.BookDtoMapper
+import com.gunt.kakaosearchrevision.data.repository.api.BooksService
+import com.gunt.kakaosearchrevision.data.repository.api.model.BookDtoMapper
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Named
 import javax.inject.Singleton
 
 

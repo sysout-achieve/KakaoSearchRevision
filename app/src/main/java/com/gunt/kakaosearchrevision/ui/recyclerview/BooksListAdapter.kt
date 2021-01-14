@@ -3,10 +3,8 @@ package com.gunt.kakaosearchrevision.ui.recyclerview
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.gunt.kakaosearchrevision.repository.api.model.BookDto
-import com.gunt.kakaosearchrevision.repository.api.response.ResponseBook
+import com.gunt.kakaosearchrevision.data.domain.Book
 import com.gunt.kakaosearchrevision.databinding.ItemBookBinding
-import com.gunt.kakaosearchrevision.domain.data.Book
 import kotlin.collections.ArrayList
 
 class BooksListAdapter : RecyclerView.Adapter<BooksListAdapter.BookViewHolder>() {
@@ -17,7 +15,6 @@ class BooksListAdapter : RecyclerView.Adapter<BooksListAdapter.BookViewHolder>()
         this.items.addAll(data)
         notifyDataSetChanged()
     }
-
 
     fun setRecyclerClickListener(recyclerClickListener: OnRecyclerViewClickListener<Book>) {
         recyclerViewClickListener = recyclerClickListener
@@ -42,8 +39,7 @@ class BooksListAdapter : RecyclerView.Adapter<BooksListAdapter.BookViewHolder>()
         items.clear()
     }
 
-    class BookViewHolder(private val binding: ItemBookBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    class BookViewHolder(private val binding: ItemBookBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(data: Book) {
             binding.tempBook = data
             binding.executePendingBindings()

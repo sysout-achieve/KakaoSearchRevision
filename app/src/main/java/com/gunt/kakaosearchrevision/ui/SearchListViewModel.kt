@@ -2,8 +2,8 @@ package com.gunt.kakaosearchrevision.ui
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
-import com.gunt.kakaosearchrevision.domain.data.Book
-import com.gunt.kakaosearchrevision.repository.BookRepository
+import com.gunt.kakaosearchrevision.data.repository.BookRepository
+import com.gunt.kakaosearchrevision.data.domain.Book
 import com.gunt.kakaosearchrevision.ui.recyclerview.BooksListAdapter
 import kotlinx.coroutines.launch
 import kotlin.Exception
@@ -72,7 +72,7 @@ constructor(
     }
 
     private fun incrementPage() {
-        setPage(currentPage + 1)
+        setPage(++currentPage)
     }
 
     private fun resetSearchState() {

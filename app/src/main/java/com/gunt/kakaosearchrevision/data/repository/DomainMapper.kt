@@ -1,4 +1,4 @@
-package com.gunt.kakaosearchrevision.repository
+package com.gunt.kakaosearchrevision.data.repository
 
 interface DomainMapper<T, DomainModel> {
     fun mapToDomainModel(model: T): DomainModel

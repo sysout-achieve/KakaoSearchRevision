@@ -1,10 +1,9 @@
-package com.gunt.kakaosearchrevision.repository.api
+package com.gunt.kakaosearchrevision.data.repository.api
 
 import com.gunt.kakaosearchrevision.di.KAKAO_API_KEY
-import com.gunt.kakaosearchrevision.repository.REQUEST_BOOK_LIST_SIZE
-import com.gunt.kakaosearchrevision.repository.api.response.ResponseBook
+import com.gunt.kakaosearchrevision.data.repository.REQUEST_BOOK_LIST_SIZE
+import com.gunt.kakaosearchrevision.data.repository.api.response.ResponseBook
 import retrofit2.http.GET
-import retrofit2.http.Header
 import retrofit2.http.Headers
 import retrofit2.http.Query
 

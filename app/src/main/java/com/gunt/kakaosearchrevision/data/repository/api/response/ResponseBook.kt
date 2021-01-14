@@ -1,6 +1,6 @@
-package com.gunt.kakaosearchrevision.repository.api.response
+package com.gunt.kakaosearchrevision.data.repository.api.response
 
-import com.gunt.kakaosearchrevision.repository.api.model.BookDto
+import com.gunt.kakaosearchrevision.data.repository.api.model.BookDto
 
 data class ResponseBook(
         val meta: BookMeta,

@@ -14,8 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
 import com.gunt.kakaosearchrevision.BR
 import com.gunt.kakaosearchrevision.R
+import com.gunt.kakaosearchrevision.data.domain.Book
 import com.gunt.kakaosearchrevision.databinding.FragmentSearchListBinding
-import com.gunt.kakaosearchrevision.domain.data.Book
 import com.gunt.kakaosearchrevision.ui.recyclerview.EndlessRecyclerOnScrollListener
 import com.gunt.kakaosearchrevision.ui.recyclerview.OnRecyclerViewClickListener
 import com.gunt.kakaosearchrevision.ui.viewutil.SwipeRefreshTheme

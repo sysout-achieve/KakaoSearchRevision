@@ -1,7 +1,7 @@
-package com.gunt.kakaosearchrevision.repository.api.model
+package com.gunt.kakaosearchrevision.data.repository.api.model
 
-import com.gunt.kakaosearchrevision.domain.data.Book
-import com.gunt.kakaosearchrevision.repository.DomainMapper
+import com.gunt.kakaosearchrevision.data.domain.Book
+import com.gunt.kakaosearchrevision.data.repository.DomainMapper
 
 class BookDtoMapper : DomainMapper<BookDto, Book> {
     override fun mapToDomainModel(model: BookDto): Book {

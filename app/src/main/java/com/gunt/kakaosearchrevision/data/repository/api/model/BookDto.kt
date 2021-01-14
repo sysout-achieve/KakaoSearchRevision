@@ -1,4 +1,4 @@
-package com.gunt.kakaosearchrevision.repository.api.model
+package com.gunt.kakaosearchrevision.data.repository.api.model
 
 import java.io.Serializable
 
