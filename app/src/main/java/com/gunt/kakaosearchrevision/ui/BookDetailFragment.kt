@@ -12,7 +12,6 @@ import com.gunt.kakaosearchrevision.databinding.FragmentBookDetailBinding
 import com.gunt.kakaosearchrevision.ui.viewutil.scratchText
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
 class BookDetailFragment : Fragment() {
 
@@ -34,5 +33,6 @@ class BookDetailFragment : Fragment() {
 
         return view
     }
+
 
 }

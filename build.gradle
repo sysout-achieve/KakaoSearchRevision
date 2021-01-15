@@ -18,6 +18,7 @@ buildscript {
         rxKotlinVersion = '3.0.0'
         rxAndroidVersion = '3.0.0'
         rxBindingVersion = '4.0.0'
+        navigationVersion = '2.3.2'
         // testing
         junitVersion = '4.13.1'
         junitRunnerVersion = '1.1.0'

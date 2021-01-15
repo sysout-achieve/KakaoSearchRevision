@@ -134,6 +134,10 @@ dependencies {
     testImplementation 'org.mockito:mockito-inline:2.21.0'
 
 
+    // navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.navigationVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$rootProject.navigationVersion"
+
 
     implementation 'androidx.compose.ui:ui:1.0.0-alpha08'
     // Tooling support (Previews, etc.)
@@ -151,4 +155,6 @@ dependencies {
 
     // UI Tests
     androidTestImplementation 'androidx.compose.ui:ui-test-junit4:1.0.0-alpha08'
+
+
 }

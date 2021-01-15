@@ -65,7 +65,10 @@
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:setAdapter='@{viewModel.getAdapter()}' />
+                app:setAdapter='@{viewModel.getAdapter()}'
+                tools:itemCount="3"
+                tools:listitem="@layout/item_book"
+                />
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
