@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity(), Communicator {
         }
     }
 
-    override fun passData(argument: Bundle) {
-        navigator.navigateTo(Screens.Detail, argument)
+    override fun passData(screens: Screens, argument: Bundle) {
+        navigator.navigateTo(screens, argument)
     }
 }

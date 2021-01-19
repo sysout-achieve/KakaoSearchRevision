@@ -13,25 +13,29 @@ import javax.inject.Singleton
 
 
 private const val BASE_URL = "https://dapi.kakao.com"
+private const val SPARE_URL = "https://dapi.kakao.com"
 const val KAKAO_API_KEY = BuildConfig.KAKAO_KEY
 
 @Module
 @InstallIn(ApplicationComponent::class)
 object RetrofitModule {
 
+
     @Singleton
     @Provides
-    fun provideBookMapper():BookDtoMapper{
+    fun provideBookMapper(): BookDtoMapper {
         return BookDtoMapper()
     }
 
     @Singleton
     @Provides
-    fun provideRetrofitApiService() :BooksService{
+    fun provideRetrofitApiService(): BooksService {
         return Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-                .create(BooksService::class.java)
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(BooksService::class.java)
     }
+
+
 }

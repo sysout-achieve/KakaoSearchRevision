@@ -1,6 +1,5 @@
-package com.gunt.kakaosearchrevision.data.repository.domain
+package com.gunt.kakaosearchrevision.data.domain
 
-import com.gunt.kakaosearchrevision.data.domain.Book
 
 object DummyBookData {
 

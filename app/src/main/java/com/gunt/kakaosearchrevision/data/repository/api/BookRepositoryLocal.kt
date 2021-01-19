@@ -1,17 +1,15 @@
-package com.gunt.kakaosearchrevision.data.repository
+package com.gunt.kakaosearchrevision.data.repository.api
 
 import com.gunt.kakaosearchrevision.data.domain.Book
-import com.gunt.kakaosearchrevision.data.repository.api.BooksService
+import com.gunt.kakaosearchrevision.data.repository.BookRepository
 import com.gunt.kakaosearchrevision.data.repository.api.model.BookDtoMapper
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityRetainedComponent
 
-const val REQUEST_BOOK_LIST_SIZE: Int = 50
-
 @Module
 @InstallIn(ActivityRetainedComponent::class)
-class BookRepositoryImpl
+class BookRepositoryLocal
 constructor(
     private var booksService: BooksService,
     private var mapper: BookDtoMapper
@@ -21,8 +19,7 @@ constructor(
         return mapper.toDomainModelList(
             booksService.requestSearchBooks(
                 keyword = keyword,
-                page = page,
-                size = REQUEST_BOOK_LIST_SIZE
+                page = page
             ).documents
         )
     }

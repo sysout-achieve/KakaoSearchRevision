@@ -25,6 +25,8 @@ object GlobalExceptionHandler : Thread.UncaughtExceptionHandler {
             startErrorActivity(this, e.toString())
         } ?: Thread.getDefaultUncaughtExceptionHandler()?.uncaughtException(t, e)
 
+
+        //프로세스를 종료시켜 앱종료에 대한 다이얼로그 팝업 종료 -> 사용자에게 예상치 못한 종료를 안드로이드 기본 다이얼로그가 아닌 커스텀한 화면으로 보여주려 함
         Process.killProcess(Process.myPid())
         exitProcess(-1)
     }
