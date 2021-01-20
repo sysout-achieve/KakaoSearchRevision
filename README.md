@@ -80,3 +80,17 @@ LiveData
   <br>
   <hr>
   
+  <br>
+
+### 예외처리
+
+전체 프로세스에서 의도치 않은 에러가 나올 경우 
+<img src="https://miro.medium.com/max/1080/1*9hpEKzq--egTEixfwHve9Q.jpeg" width="50%" height="50%" title="https://miro.medium.com/max/1080/1*9hpEKzq--egTEixfwHve9Q.jpeg"></img>  <br>
+이러한 화면을 사용자가 접하게 되면 사용자 경험에 안좋은 영향을 주게 되고 자주 일어난다면 사용자가 이탈하는 것은 뻔한 이야기
+<br>
+처리하지 못한 예외가 발생할 경우 애플리케이션은 
+
+<img src="https://www.masterqna.com/android/?qa=blob&qa_blobid=7218132349570726514" width="50%" height="40%" title="https://www.masterqna.com/android/?qa=blob&qa_blobid=7218132349570726514"></img>  <br>
+이런 로그를 뱉으면서 죽음을 맞이함<br>
+
+App Kill이 일어나는 
