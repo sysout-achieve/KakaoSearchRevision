@@ -98,11 +98,12 @@ LiveData
 App Kill이 일어나는 시점에 앱에서 제공하는 화면으로 에러를 알려주고 기존 앱의 화면으로 재진입할 수 있게 구현한다면 UX측면에서 덜 나쁜(오류가 안나는게 가장 좋음) 에러처리가 될 것이라 생각함
 <br>
 비슷한 고민을 먼저하신 선배개발자님의 블로그를 보고 예외처리를 커스텀하여 앱에 적용<br>
-
 [박상권님의 블로그](https://medium.com/prnd/%EC%95%84%EB%A6%84%EB%8B%B5%EA%B2%8C-%EC%95%B1-%EC%98%A4%EB%A5%98-%EC%B2%98%EB%A6%AC%ED%95%98%EA%B8%B0-8bf9a46df515)
+
 <br>
 crashlytics와 같은 이슈트래킹 library를 적용하지 않은 프로젝트이기 때문에 DefaultUncaughtExceptionHandler에 예외처리에 대한 내용을 작성한 GlobalExceptionHandler를 만들어 적용<br>
 
-기술 연습용 프로젝트기 때문에 사용자용 에러화면이 아닌 에러 로그와 되돌아가기만 구현하여 앱에 적용(필요에따라 커스텀 가능)
+기술 연습용 프로젝트기 때문에 사용자용 에러화면이 아닌 에러 로그와 되돌아가기만 구현하여 앱에 적용(필요에따라 커스텀 가능)<br>
+<img src="https://github.com/sysout-achieve/KakaoSearchRevision/blob/master/KakaoTalk_Photo_2021-01-20-17-48-18.jpeg?raw=true" width="32%" height="28%" title="https://github.com/sysout-achieve/KakaoSearchRevision/blob/master/KakaoTalk_Photo_2021-01-20-17-48-18.jpeg?raw=true"></img>  <br>
 <br>
 <hr>
