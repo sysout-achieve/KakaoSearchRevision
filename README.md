@@ -84,13 +84,25 @@ LiveData
 
 ### 예외처리
 
-전체 프로세스에서 의도치 않은 에러가 나올 경우 
+전체 프로세스에서 의도치 않은 에러가 나올 경우 <br>
+<br>
 <img src="https://miro.medium.com/max/1080/1*9hpEKzq--egTEixfwHve9Q.jpeg" width="50%" height="50%" title="https://miro.medium.com/max/1080/1*9hpEKzq--egTEixfwHve9Q.jpeg"></img>  <br>
-이러한 화면을 사용자가 접하게 되면 사용자 경험에 안좋은 영향을 주게 되고 자주 일어난다면 사용자가 이탈하는 것은 뻔한 이야기
+이러한 화면을 사용자가 접하게 되면 사용자 경험에 안좋은 영향을 주게 되고 자주 일어난다면 사용자가 이탈하는 것은 뻔한 이야기다.
 <br>
 처리하지 못한 예외가 발생할 경우 애플리케이션은 
 
 <img src="https://www.masterqna.com/android/?qa=blob&qa_blobid=7218132349570726514" width="50%" height="40%" title="https://www.masterqna.com/android/?qa=blob&qa_blobid=7218132349570726514"></img>  <br>
 이런 로그를 뱉으면서 죽음을 맞이함<br>
 
-App Kill이 일어나는 
+위 로그를 발생시키는 시점에 예외처리를 만들어둘순 없을까라는 아이디어로 접근.<br>
+App Kill이 일어나는 시점에 앱에서 제공하는 화면으로 에러를 알려주고 기존 앱의 화면으로 재진입할 수 있게 구현한다면 UX측면에서 덜 나쁜(오류가 안나는게 가장 좋음) 에러처리가 될 것이라 생각함
+<br>
+비슷한 고민을 먼저하신 선배개발자님의 블로그를 보고 예외처리를 커스텀하여 앱에 적용<br>
+
+[박상권님의 블로그](https://medium.com/prnd/%EC%95%84%EB%A6%84%EB%8B%B5%EA%B2%8C-%EC%95%B1-%EC%98%A4%EB%A5%98-%EC%B2%98%EB%A6%AC%ED%95%98%EA%B8%B0-8bf9a46df515)
+<br>
+crashlytics와 같은 이슈트래킹 library를 적용하지 않은 프로젝트이기 때문에 DefaultUncaughtExceptionHandler에 예외처리에 대한 내용을 작성한 GlobalExceptionHandler를 만들어 적용<br>
+
+기술 연습용 프로젝트기 때문에 사용자용 에러화면이 아닌 에러 로그와 되돌아가기만 구현하여 앱에 적용(필요에따라 커스텀 가능)
+<br>
+<hr>
