@@ -1,9 +1,9 @@
 package com.gunt.kakaosearchrevision.di
 
 import com.gunt.kakaosearchrevision.data.repository.BookRepository
-import com.gunt.kakaosearchrevision.data.repository.api.BookRepositoryLocal
-import com.gunt.kakaosearchrevision.data.repository.api.BooksService
-import com.gunt.kakaosearchrevision.data.repository.api.model.BookDtoMapper
+import com.gunt.kakaosearchrevision.data.repository.network.BookRepositoryLocal
+import com.gunt.kakaosearchrevision.data.repository.network.BooksService
+import com.gunt.kakaosearchrevision.data.repository.network.model.BookDtoMapper
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -8,7 +8,7 @@ import com.gunt.kakaosearchrevision.ui.BookDetailFragment
 import com.gunt.kakaosearchrevision.ui.SearchListFragment
 import javax.inject.Inject
 
-class NavigationImpl @Inject constructor(private var activity: FragmentActivity) : AppNavigator {
+class NavigationImpl @Inject constructor(private val activity: FragmentActivity) : AppNavigator {
 
     override fun navigateTo(screens: Screens) {
         val fragment = when (screens) {

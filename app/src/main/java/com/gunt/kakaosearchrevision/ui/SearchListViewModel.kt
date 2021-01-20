@@ -14,12 +14,8 @@ constructor(
     private val bookRepository: BookRepository
 ) : ViewModel() {
     var booksListAdapter = BooksListAdapter()
-
-    var searchTxtStr = ""
-    var currentPage = 1
-    private var responseBook: List<Book> = listOf()
-
-    private var is_end = false
+    var search = Search()
+    var responseBook: List<Book> = listOf()
     private var loading = MutableLiveData(false)
 
     fun onTriggerEvent(event: BookListEvent) {
@@ -27,12 +23,10 @@ constructor(
             try {
                 when (event) {
                     is BookListEvent.NewSearchEvent -> {
-                        newSearch()
+                        searchNew()
                     }
                     is BookListEvent.NextPageEvent -> {
-                        nextPage()
-                    }
-                    is BookListEvent.RestoreStateEvent -> {
+                        searchNextPage()
                     }
                 }
             } catch (e: Exception) {
@@ -41,48 +35,42 @@ constructor(
         }
     }
 
-    private suspend fun newSearch() {
-        try {
-            loading.value = true
-            resetSearchState()
-            val result = bookRepository.searchBooks(keyword = searchTxtStr, page = currentPage)
-            responseBook = result
-            booksListAdapter.clearData()
-            booksListAdapter.setDataList(responseBook)
-        } catch (e: Exception) {
-
-        }
+    private suspend fun searchNew() {
+        loading.value = true
+        resetList()
+        search.firstPage()
+        val result = getBooksRepository()
+        responseBook = result
+        booksListAdapter.clearData()
+        booksListAdapter.setDataList(responseBook)
         loading.value = false
     }
 
-    private suspend fun nextPage() {
+    private suspend fun searchNextPage() {
         loading.value = true
         incrementPage()
-
-        val result = bookRepository.searchBooks(keyword = searchTxtStr, page = currentPage)
-        appendBooks(result)
+        val result = getBooksRepository()
+        booksListAdapter.setDataList(appendBooks(result))
         loading.value = false
     }
 
-    private fun appendBooks(books: List<Book>) {
+    private suspend fun getBooksRepository(): List<Book> {
+        return bookRepository.searchBooks(keyword = search.searchStr, page = search.page)
+    }
+
+    fun appendBooks(books: List<Book>) :List<Book> {
         val current = ArrayList(this.responseBook)
         current.addAll(books)
         this.responseBook = current
-        booksListAdapter.setDataList(current)
+        return this.responseBook
     }
 
     private fun incrementPage() {
-        setPage(++currentPage)
+        search.incrementPage()
     }
 
-    private fun resetSearchState() {
-        is_end = false
+    private fun resetList() {
         responseBook = listOf()
-        setPage(1)
-    }
-
-    private fun setPage(page: Int) {
-        this.currentPage = page
     }
 
     fun getLoading(): MutableLiveData<Boolean> {
@@ -93,4 +81,21 @@ constructor(
         return booksListAdapter
     }
 
+    class Search {
+        var searchStr = ""
+        var page = 1
+
+        fun incrementPage() {
+            page++
+        }
+
+        fun firstPage() {
+            page = 1
+        }
+
+        fun restoreState() {
+            searchStr = ""
+            page = 1
+        }
+    }
 }

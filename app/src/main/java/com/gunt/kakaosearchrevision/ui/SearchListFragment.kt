@@ -16,6 +16,7 @@ import com.gunt.kakaosearchrevision.BR
 import com.gunt.kakaosearchrevision.R
 import com.gunt.kakaosearchrevision.data.domain.Book
 import com.gunt.kakaosearchrevision.databinding.FragmentSearchListBinding
+import com.gunt.kakaosearchrevision.navigator.Screens
 import com.gunt.kakaosearchrevision.ui.recyclerview.EndlessRecyclerOnScrollListener
 import com.gunt.kakaosearchrevision.ui.recyclerview.OnRecyclerViewClickListener
 import com.gunt.kakaosearchrevision.ui.viewutil.SwipeRefreshTheme
@@ -44,7 +45,7 @@ class SearchListFragment : Fragment() {
         override fun onRecyclerViewClickListener(item: Book) {
             val bundle = Bundle()
             bundle.putSerializable("book", item)
-            communicator.passData(bundle)
+            communicator.passData(Screens.Detail, bundle)
         }
     }
 
@@ -66,13 +67,13 @@ class SearchListFragment : Fragment() {
             DataBindingUtil.inflate(layoutInflater, R.layout.fragment_search_list, container, false)
         binding.setVariable(BR.viewModel, viewModel)
         binding.executePendingBindings()
+        val view = binding.root
         setupBinding()
         setupEndScrollListener()
         setupRecyclerViewItemClickListener()
         setupSwipeRefresh()
         setupSearchEditTextChangeListener()
 
-        val view = binding.root
 
         binding.lifecycleOwner = this
 

@@ -1,7 +1,7 @@
-package com.gunt.kakaosearchrevision.data.repository.api
+package com.gunt.kakaosearchrevision.data.repository.network
 
 import com.gunt.kakaosearchrevision.di.KAKAO_API_KEY
-import com.gunt.kakaosearchrevision.data.repository.api.response.ResponseBook
+import com.gunt.kakaosearchrevision.data.repository.network.response.ResponseBook
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Query

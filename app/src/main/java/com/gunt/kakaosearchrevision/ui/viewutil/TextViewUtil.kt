@@ -5,14 +5,21 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.gunt.kakaosearchrevision.R
 
+var PRICE_UNIT = "원"
 
 object TextViewExtensions {
+
     @JvmStatic
-    @BindingAdapter("setPriceStr")
-    fun setPriceStr(textView: TextView, price: Long) {
-        textView.text = "$price ${textView.context.getString(R.string.price_unit)}"
+    @BindingAdapter("bindTextViewWithPriceStr")
+    fun bindTextViewWithPriceStr(textView: TextView, price: Long) {
+        textView.text = getPriceStrWithCurrentUnit(price)
     }
+    fun getPriceStrWithCurrentUnit(price: Long): String {
+        return "$price $PRICE_UNIT"
+    }
+
 }
+
 
 enum class TextViewTheme(val fontSize: Float, val textColor: Int) {
     CLASSIC(20f, R.color.black),

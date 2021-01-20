@@ -1,8 +1,8 @@
-package com.gunt.kakaosearchrevision.data.repository.api
+package com.gunt.kakaosearchrevision.data.repository.network
 
 import com.gunt.kakaosearchrevision.data.domain.Book
 import com.gunt.kakaosearchrevision.data.repository.BookRepository
-import com.gunt.kakaosearchrevision.data.repository.api.model.BookDtoMapper
+import com.gunt.kakaosearchrevision.data.repository.network.model.BookDtoMapper
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityRetainedComponent

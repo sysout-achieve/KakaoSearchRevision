@@ -1,4 +1,4 @@
-package com.gunt.kakaosearchrevision.data.repository.api.model
+package com.gunt.kakaosearchrevision.data.repository.network.model
 
 import com.gunt.kakaosearchrevision.data.domain.Book
 import com.gunt.kakaosearchrevision.data.repository.DomainMapper

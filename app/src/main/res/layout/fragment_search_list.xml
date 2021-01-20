@@ -41,7 +41,7 @@
                 android:lines="1"
                 android:paddingStart="@dimen/margin_start_guide"
                 android:singleLine="true"
-                android:text="@={viewModel.searchTxtStr}" />
+                android:text="@={viewModel.search.searchStr}" />
 
             <ImageButton
                 android:id="@+id/btn_search"

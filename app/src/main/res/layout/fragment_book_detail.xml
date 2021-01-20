@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="bookDetail"
-            type="com.gunt.kakaosearchrevision.data.domain.Book" />
+            name="detailViewModel"
+            type="com.gunt.kakaosearchrevision.ui.BookDetailViewModel" />
     </data>
 
 
@@ -28,7 +28,7 @@
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:loadImage="@{bookDetail.thumbnail}" />
+            app:loadImage="@{detailViewModel.book.thumbnail}" />
 
         <TextView
             android:id="@+id/tv_title"
@@ -39,7 +39,7 @@
             android:layout_toEndOf="@+id/imgv_thumbnail"
             android:ellipsize="end"
             android:maxLines="2"
-            android:text="@{bookDetail.title}"
+            android:text="@{detailViewModel.book.title}"
             android:textColor="@color/black"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -58,7 +58,7 @@
             android:lineSpacingExtra="2sp"
             android:maxLength="250"
             android:maxLines="8"
-            android:text="@{bookDetail.contents}"
+            android:text="@{detailViewModel.book.contents}"
             android:textColor="@color/black"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -75,9 +75,9 @@
             android:layout_toEndOf="@+id/imgv_thumbnail"
             android:maxLines="2"
             android:textSize="20sp"
+            app:bindTextViewWithPriceStr="@{detailViewModel.book.price}"
             app:layout_constraintStart_toEndOf="@+id/imgv_thumbnail"
             app:layout_constraintTop_toBottomOf="@+id/tv_title"
-            app:setPriceStr="@{bookDetail.price}"
             tools:text="price" />
 
         <TextView
@@ -90,9 +90,9 @@
             android:maxLines="1"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="20sp"
+            app:bindTextViewWithPriceStr="@{detailViewModel.book.sale_price}"
             app:layout_constraintStart_toEndOf="@+id/imgv_thumbnail"
             app:layout_constraintTop_toBottomOf="@+id/tv_price"
-            app:setPriceStr="@{bookDetail.sale_price}"
             tools:text="price" />
 
         <TextView
@@ -104,7 +104,7 @@
             android:layout_marginTop="16dp"
             android:layout_toEndOf="@+id/imgv_thumbnail"
             android:maxLines="1"
-            android:text="@{bookDetail.authors.toString()}"
+            android:text="@{detailViewModel.book.authors.toString()}"
             android:textColor="@color/black"
             android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@+id/imgv_thumbnail"
@@ -120,7 +120,7 @@
             android:layout_marginTop="8dp"
             android:layout_toEndOf="@+id/imgv_thumbnail"
             android:maxLines="1"
-            android:text="@{bookDetail.publisher}"
+            android:text="@{detailViewModel.book.publisher}"
             android:textColor="@color/black"
             android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@+id/imgv_thumbnail"
