@@ -74,7 +74,6 @@ class SearchListFragment : Fragment() {
         setupSwipeRefresh()
         setupSearchEditTextChangeListener()
 
-
         binding.lifecycleOwner = this
 
         viewModel.getLoading().observe(this.viewLifecycleOwner, Observer {
