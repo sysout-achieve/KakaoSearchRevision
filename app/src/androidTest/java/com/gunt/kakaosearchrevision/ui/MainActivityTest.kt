@@ -15,12 +15,17 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4ClassRunner::class)
-class MainActivityTest{
+class MainActivityTest {
     private lateinit var activityScenario: ActivityScenario<MainActivity>
 
     @Before
     fun setUp() {
-        activityScenario = ActivityScenario.launch<MainActivity>(Intent(ApplicationProvider.getApplicationContext(),MainActivity::class.java))
+        activityScenario = ActivityScenario.launch<MainActivity>(
+            Intent(
+                ApplicationProvider.getApplicationContext(),
+                MainActivity::class.java
+            )
+        )
     }
 
     @After

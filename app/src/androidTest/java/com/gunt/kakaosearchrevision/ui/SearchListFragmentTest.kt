@@ -1,23 +1,25 @@
 package com.gunt.kakaosearchrevision.ui
 
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
+import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.filters.MediumTest
+import com.gunt.kakaosearchrevision.R
 import com.gunt.kakaosearchrevision.launchFragmentInHiltContainer
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-@MediumTest
 @RunWith(AndroidJUnit4::class)
-@ExperimentalCoroutinesApi
 @HiltAndroidTest
 class SearchListFragmentTest {
     @get:Rule
     var hiltRule = HiltAndroidRule(this)
+
 
     @Before
     fun setUp() {
@@ -27,7 +29,8 @@ class SearchListFragmentTest {
 
     @Test
     fun fragmentInViewTest() {
-
+        onView(withId(R.id.edit_search)).check(matches(isDisplayed()))
+        onView(withId(R.id.btn_search)).check(matches(isDisplayed()))
     }
 
 }

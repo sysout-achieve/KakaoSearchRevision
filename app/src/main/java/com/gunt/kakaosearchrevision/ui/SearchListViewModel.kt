@@ -5,7 +5,7 @@ import androidx.lifecycle.*
 import com.gunt.kakaosearchrevision.data.repository.BookRepository
 import com.gunt.kakaosearchrevision.data.domain.Book
 import com.gunt.kakaosearchrevision.ui.recyclerview.BooksListAdapter
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import kotlin.Exception
 
 class SearchListViewModel
@@ -21,44 +21,44 @@ constructor(
     fun onTriggerEvent(event: BookListEvent) {
         viewModelScope.launch {
             try {
+                loading.value = true
                 when (event) {
                     is BookListEvent.NewSearchEvent -> {
                         searchNew()
+                        clearAdapter()
+                        setDataToAdapter()
                     }
                     is BookListEvent.NextPageEvent -> {
                         searchNextPage()
+                        setDataToAdapter()
                     }
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
+            } finally {
+                loading.value = false
             }
         }
     }
 
-    private suspend fun searchNew() {
-        loading.value = true
+    suspend fun searchNew() {
         resetList()
         search.firstPage()
         val result = getBooksRepository()
         responseBook = result
-        booksListAdapter.clearData()
-        booksListAdapter.setDataList(responseBook)
-        loading.value = false
     }
 
-    private suspend fun searchNextPage() {
-        loading.value = true
+    suspend fun searchNextPage() {
         incrementPage()
         val result = getBooksRepository()
-        booksListAdapter.setDataList(appendBooks(result))
-        loading.value = false
+        responseBook = appendBooks(result)
     }
 
     private suspend fun getBooksRepository(): List<Book> {
         return bookRepository.searchBooks(keyword = search.searchStr, page = search.page)
     }
 
-    fun appendBooks(books: List<Book>) :List<Book> {
+    fun appendBooks(books: List<Book>): List<Book> {
         val current = ArrayList(this.responseBook)
         current.addAll(books)
         this.responseBook = current
@@ -79,6 +79,14 @@ constructor(
 
     fun getAdapter(): BooksListAdapter {
         return booksListAdapter
+    }
+
+    private fun setDataToAdapter() {
+        booksListAdapter.setDataList(responseBook)
+    }
+
+    private fun clearAdapter() {
+        booksListAdapter.clearData()
     }
 
     class Search {

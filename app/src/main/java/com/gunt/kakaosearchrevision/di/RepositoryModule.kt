@@ -1,7 +1,7 @@
 package com.gunt.kakaosearchrevision.di
 
 import com.gunt.kakaosearchrevision.data.repository.BookRepository
-import com.gunt.kakaosearchrevision.data.repository.network.BookRepositoryLocal
+import com.gunt.kakaosearchrevision.data.repository.network.BookRepositoryRemote
 import com.gunt.kakaosearchrevision.data.repository.network.BooksService
 import com.gunt.kakaosearchrevision.data.repository.network.model.BookDtoMapper
 import dagger.Module
@@ -20,7 +20,7 @@ object RepositoryModule {
             booksService: BooksService,
             bookDtoMapper: BookDtoMapper
     ): BookRepository {
-        return BookRepositoryLocal(
+        return BookRepositoryRemote(
             booksService = booksService,
             mapper = bookDtoMapper
         )

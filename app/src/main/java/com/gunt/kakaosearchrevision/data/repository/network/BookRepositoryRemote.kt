@@ -9,7 +9,7 @@ import dagger.hilt.android.components.ActivityRetainedComponent
 
 @Module
 @InstallIn(ActivityRetainedComponent::class)
-class BookRepositoryLocal
+class BookRepositoryRemote
 constructor(
     private var booksService: BooksService,
     private var mapper: BookDtoMapper

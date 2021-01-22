@@ -44,7 +44,7 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    composeOptions{
+    composeOptions {
         def kotlin_compiler_version = "1.4.21"
         kotlinCompilerVersion kotlin_compiler_version
 
@@ -53,6 +53,7 @@ android {
     }
     testOptions {
         unitTests {
+            returnDefaultValues = true
             includeAndroidResources = true
         }
     }
@@ -126,6 +127,8 @@ dependencies {
     androidTestImplementation "androidx.test:rules:$rootProject.junitRunnerVersion"
     testImplementation "junit:junit:$rootProject.junitVersion"
     androidTestImplementation "androidx.test.ext:junit:$rootProject.androidxJunitVersion"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.coroutinesVersion"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$rootProject.coroutinesVersion"
     testImplementation "com.google.truth:truth:1.0"
 
     // Androidx Test
@@ -134,6 +137,7 @@ dependencies {
     })
     debugImplementation "androidx.fragment:fragment-testing:$rootProject.testFragmentVersion"
     testImplementation 'org.mockito:mockito-inline:2.21.0'
+    androidTestImplementation "org.mockito:mockito-core:$rootProject.mockitoVersion"
 
     // navigation
     implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.navigationVersion"
