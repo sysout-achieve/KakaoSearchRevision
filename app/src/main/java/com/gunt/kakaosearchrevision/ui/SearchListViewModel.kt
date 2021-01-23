@@ -11,12 +11,14 @@ import kotlin.Exception
 class SearchListViewModel
 @ViewModelInject
 constructor(
-    private val bookRepository: BookRepository
+        private val bookRepository: BookRepository
 ) : ViewModel() {
     var booksListAdapter = BooksListAdapter()
     var search = Search()
     var responseBook: List<Book> = listOf()
     private var loading = MutableLiveData(false)
+
+
 
     fun onTriggerEvent(event: BookListEvent) {
         viewModelScope.launch {
@@ -44,8 +46,7 @@ constructor(
     suspend fun searchNew() {
         resetList()
         search.firstPage()
-        val result = getBooksRepository()
-        responseBook = result
+        responseBook = getBooksRepository()
     }
 
     suspend fun searchNextPage() {

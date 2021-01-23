@@ -17,7 +17,14 @@ class BookRepositoryTest {
 
     @Before
     fun setUp() {
-        bookRepository = FakeBookRepository()
+        val books: List<Book> = listOf(
+                Book(title = "title1"),
+                Book(title = "title2"),
+                Book(title = "title3"),
+                Book(title = "empty1"),
+                Book(title = "empty2")
+        )
+        bookRepository = FakeBookRepository(bookList = books as MutableList<Book>)
     }
 
 

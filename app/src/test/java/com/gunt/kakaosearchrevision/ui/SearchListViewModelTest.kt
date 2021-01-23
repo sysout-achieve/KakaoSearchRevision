@@ -2,24 +2,26 @@ package com.gunt.kakaosearchrevision.ui
 
 import com.google.common.truth.Truth.assertThat
 import com.gunt.kakaosearchrevision.data.domain.Book
-import com.gunt.kakaosearchrevision.data.domain.DummyBookData
 import com.gunt.kakaosearchrevision.data.repository.FakeBookRepository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
 import org.junit.Test
-import org.mockito.Mockito.*
 import java.lang.reflect.Field
 import java.lang.reflect.Method
-import kotlin.coroutines.CoroutineContext
 
 class SearchListViewModelTest {
     private lateinit var searchListViewModel: SearchListViewModel
 
     @Before
     fun setUp() {
-        searchListViewModel = SearchListViewModel(FakeBookRepository())
+        val books: List<Book> = listOf(
+                Book(title = "title1"),
+                Book(title = "title2"),
+                Book(title = "title3"),
+                Book(title = "empty1"),
+                Book(title = "empty2")
+        )
+        searchListViewModel = SearchListViewModel(FakeBookRepository(bookList = books as MutableList<Book>))
     }
 
     @Test
@@ -28,7 +30,7 @@ class SearchListViewModelTest {
         assertThat(searchListViewModel.search.page).isEqualTo(1)
 
         val field: Field =
-            searchListViewModel.javaClass.getDeclaredField("responseBook")
+                searchListViewModel.javaClass.getDeclaredField("responseBook")
         field.isAccessible = true
         val responseBook: List<Book> = field.get(searchListViewModel) as List<Book>
         assertThat(responseBook).hasSize(0)
@@ -51,11 +53,13 @@ class SearchListViewModelTest {
     @Test
     fun appendBookTest() {
         //given
-        //DummyBookData.books 갯수 = 5
-        var books: List<Book> = listOf()
-        val current = ArrayList(books)
-        current.addAll(DummyBookData.books)
-        books = current
+        val books: List<Book> = listOf(
+                Book(title = "title1"),
+                Book(title = "title2"),
+                Book(title = "title3"),
+                Book(title = "empty1"),
+                Book(title = "empty2")
+        )
         assertThat(searchListViewModel.responseBook).hasSize(0)
 
         //when
@@ -83,14 +87,13 @@ class SearchListViewModelTest {
         //given
         searchListViewModel.search.searchStr = "title"
         val expectedPage = searchListViewModel.search.page + 1
-        searchListViewModel.responseBook = DummyBookData.books.toList()
 
         //when
         searchListViewModel.searchNextPage()
 
         //then
         assertThat(searchListViewModel.search.page).isEqualTo(expectedPage)
-        assertThat(searchListViewModel.responseBook.size).isNotEqualTo(DummyBookData.books.size)
         assertThat(searchListViewModel.responseBook.size).isNotEqualTo(0)
+        assertThat(searchListViewModel.responseBook.size).isNotEqualTo(5)
     }
 }

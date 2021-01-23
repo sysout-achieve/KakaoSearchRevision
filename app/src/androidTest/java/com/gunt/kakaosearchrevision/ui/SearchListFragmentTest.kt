@@ -20,7 +20,6 @@ class SearchListFragmentTest {
     @get:Rule
     var hiltRule = HiltAndroidRule(this)
 
-
     @Before
     fun setUp() {
         hiltRule.inject()
