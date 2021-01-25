@@ -18,8 +18,6 @@ constructor(
     var responseBook: List<Book> = listOf()
     private var loading = MutableLiveData(false)
 
-
-
     fun onTriggerEvent(event: BookListEvent) {
         viewModelScope.launch {
             try {

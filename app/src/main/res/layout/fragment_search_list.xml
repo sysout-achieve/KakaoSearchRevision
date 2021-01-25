@@ -36,7 +36,7 @@
                 android:layout_weight="9"
                 android:background="@color/white"
                 android:ems="10"
-                android:hint="검색..."
+                android:hint="@string/search_hint"
                 android:inputType="textPersonName"
                 android:lines="1"
                 android:paddingStart="@dimen/margin_start_guide"
@@ -65,6 +65,7 @@
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:overScrollMode="never"
                 app:setAdapter='@{viewModel.getAdapter()}'
                 tools:itemCount="3"
                 tools:listitem="@layout/item_book"
