@@ -6,8 +6,9 @@ kakao 도서 검색 프로젝트
 ### 구성 : <br>
 - Language : Kotlin <br>
 - DI : Hilt <br>
-- AAC(MVVM, DataBinding, LiveData) <br>
+- AAC(MVVM, DataBinding, LiveData, Navigation) <br>
 - Opensource: RxKotlin, RxBinding, Retrofit, Glide, Swiperefreshlayout <br>
+- Test : Unit Test(JUnit4), Ui Test
 
 <br>
 <hr>
@@ -103,7 +104,9 @@ App Kill이 일어나는 시점에 앱에서 제공하는 화면으로 에러를
 <br>
 crashlytics와 같은 이슈트래킹 library를 적용하지 않은 프로젝트이기 때문에 DefaultUncaughtExceptionHandler에 예외처리에 대한 내용을 작성한 GlobalExceptionHandler를 만들어 적용<br>
 
-기술 연습용 프로젝트임으로 사용자용 에러화면이 아닌 에러 로그와 되돌아가기만 구현하여 앱에 적용(필요에따라 커스텀 가능)<br>
+기술 연습용 프로젝트임으로 사용자용 에러화면이 아닌 에러 로그와 되돌아가기만 구현하여 앱에 적용(필요에따라 커스텀 가능)
+<br>
+
 <img src="https://github.com/sysout-achieve/KakaoSearchRevision/blob/master/KakaoTalk_Photo_2021-01-20-17-48-18.jpeg?raw=true" width="32%" height="28%" title="https://github.com/sysout-achieve/KakaoSearchRevision/blob/master/KakaoTalk_Photo_2021-01-20-17-48-18.jpeg?raw=true"></img>  <br>
 <br>
 <hr>
