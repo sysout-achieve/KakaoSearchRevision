@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 echo "kakao.api.key=$KAKAO_API_KEY" >> ./key.api.properties
 echo "============= ./gradlew cDAT 시작 Unit Test =============";
 ./gradlew cDAT

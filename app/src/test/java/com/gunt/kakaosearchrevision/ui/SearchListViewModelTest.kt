@@ -3,12 +3,15 @@ package com.gunt.kakaosearchrevision.ui
 import com.google.common.truth.Truth.assertThat
 import com.gunt.kakaosearchrevision.data.domain.Book
 import com.gunt.kakaosearchrevision.data.repository.FakeBookRepository
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
 import org.junit.Test
 import java.lang.reflect.Field
 import java.lang.reflect.Method
 
+@ExperimentalCoroutinesApi
+@Suppress("UNCHECKED_CAST")
 class SearchListViewModelTest {
     private lateinit var searchListViewModel: SearchListViewModel
     @Before
