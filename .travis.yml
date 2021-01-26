@@ -39,4 +39,4 @@ cache:
 #  - chmod +x gradlew
 #  - chmod +rx app
 
-script: "./gradlew clean build"
+script: ./build.sh
