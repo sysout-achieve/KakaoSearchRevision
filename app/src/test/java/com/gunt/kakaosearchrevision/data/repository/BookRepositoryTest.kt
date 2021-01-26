@@ -29,16 +29,16 @@ class BookRepositoryTest {
 
 
     @Test
-    fun searchBooksTest() {
+    fun searchBooksTest() = runBlocking {
         //DummyBookData 에 title 이 포함된 Book 을 3개 가지고 있음
         //given
         search.searchStr = "title"
+
         //when
-        var list: List<Book>
-        runBlocking {
-            list = bookRepository.searchBooks(search.searchStr, search.page)
-        }
+        val list = bookRepository.searchBooks(search.searchStr, search.page)
+
         //then
         assertThat(list).hasSize(3)
     }
+
 }
