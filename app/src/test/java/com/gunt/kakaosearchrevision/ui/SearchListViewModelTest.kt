@@ -11,7 +11,6 @@ import java.lang.reflect.Method
 
 class SearchListViewModelTest {
     private lateinit var searchListViewModel: SearchListViewModel
-
     @Before
     fun setUp() {
         val books: List<Book> = listOf(

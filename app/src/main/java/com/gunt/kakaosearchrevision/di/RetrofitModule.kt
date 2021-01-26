@@ -13,13 +13,12 @@ import javax.inject.Singleton
 
 
 private const val BASE_URL = "https://dapi.kakao.com"
-private const val SPARE_URL = "https://dapi.kakao.com"
+
 const val KAKAO_API_KEY = BuildConfig.KAKAO_KEY
 
 @Module
 @InstallIn(ApplicationComponent::class)
 object RetrofitModule {
-
 
     @Singleton
     @Provides
@@ -36,6 +35,5 @@ object RetrofitModule {
             .build()
             .create(BooksService::class.java)
     }
-
 
 }

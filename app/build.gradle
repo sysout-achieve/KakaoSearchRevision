@@ -11,8 +11,9 @@ plugins {
  * Hide API keys
  */
 Properties properties = new Properties()
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
+properties.load(project.rootProject.file('key.api.properties').newDataInputStream())
 def kakaoApiKey = properties.getProperty('kakao.api.key')
+def kakaoApiKeyRelease = properties.getProperty('kakao.api.key.release')
 
 android {
     compileSdkVersion 30
@@ -26,17 +27,21 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "com.gunt.kakaosearchrevision.CustomTestRunner"
-
-        buildConfigField "String", "KAKAO_KEY", "${kakaoApiKey}"
     }
     buildFeatures {
         viewBinding true
         dataBinding true
     }
     buildTypes {
-        release {
+        debug{
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "KAKAO_KEY", "${kakaoApiKey}"
+        }
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "KAKAO_KEY", "${kakaoApiKeyRelease}"
         }
     }
     compileOptions {
@@ -140,6 +145,7 @@ dependencies {
     debugImplementation "androidx.fragment:fragment-testing:$rootProject.testFragmentVersion"
     testImplementation 'org.mockito:mockito-inline:2.21.0'
     androidTestImplementation "org.mockito:mockito-core:$rootProject.mockitoVersion"
+    testImplementation "org.robolectric:robolectric:4.2.1"
 
     // navigation
     implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.navigationVersion"

@@ -30,7 +30,6 @@ class BookRepositoryTest {
 
     @Test
     fun searchBooksTest() = runBlocking {
-        //DummyBookData 에 title 이 포함된 Book 을 3개 가지고 있음
         //given
         search.searchStr = "title"
 
