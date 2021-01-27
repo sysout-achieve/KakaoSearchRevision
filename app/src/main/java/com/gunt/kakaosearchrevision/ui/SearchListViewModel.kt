@@ -11,7 +11,7 @@ import kotlin.Exception
 class SearchListViewModel
 @ViewModelInject
 constructor(
-        private val bookRepository: BookRepository
+    private val bookRepository: BookRepository
 ) : ViewModel() {
     var booksListAdapter = BooksListAdapter()
     var search = Search()
@@ -50,18 +50,17 @@ constructor(
     suspend fun searchNextPage() {
         incrementPage()
         val result = getBooksRepository()
-        responseBook = appendBooks(result)
+        appendBooks(result)
     }
 
     private suspend fun getBooksRepository(): List<Book> {
         return bookRepository.searchBooks(keyword = search.searchStr, page = search.page)
     }
 
-    fun appendBooks(books: List<Book>): List<Book> {
+    fun appendBooks(books: List<Book>) {
         val current = ArrayList(this.responseBook)
         current.addAll(books)
         this.responseBook = current
-        return this.responseBook
     }
 
     private fun incrementPage() {

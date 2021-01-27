@@ -37,7 +37,7 @@ class SearchListFragment : Fragment() {
     private lateinit var binding: FragmentSearchListBinding
     private val viewModel: SearchListViewModel by viewModels()
 
-    //구독하고 있는 Disposable 객체 일괄 관리하기 위한 객체(리소스 일괄 제어)
+    //구독하고 있는 Disposable 객체 일괄 관리용 객체(리소스 일괄 제어)
     private var compositeDisposable = CompositeDisposable()
 
     private var recyclerViewClickListener =
