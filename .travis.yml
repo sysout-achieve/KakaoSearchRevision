@@ -20,7 +20,8 @@ cache:
 before_script:
   - chmod +x gradlew
 
-script: sh gradle/build.sh
+script: ./gradlew clean build
+#script: sh gradle/build.sh
 
 notifications:
   email: false
