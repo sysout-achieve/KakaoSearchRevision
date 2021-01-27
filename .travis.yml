@@ -2,8 +2,16 @@ language: android
 
 android:
   components:
-    - tools
-    - platform-tools
+    - build-tools-23.0.1
+    - android-23
+    - android-22
+    - add-on
+    - extra
+    - extra-android-m2repository
+    - extra-google-google_play_services
+    - extra-google-m2repository
+    - extra-android-m2repository
+    - sys-img-armeabi-v7a-android-22
 
 jdk:
   - oraclejdk8
