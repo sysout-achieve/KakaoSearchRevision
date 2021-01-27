@@ -9,10 +9,10 @@ plugins {
 /**
  * Hide API keys
  */
-Properties properties = new Properties()
-properties.load(project.rootProject.file('key.api.properties').newDataInputStream())
-def kakaoApiKey = properties.getProperty('kakao.api.key')
-def kakaoApiKeyRelease = properties.getProperty('kakao.api.key.release')
+//Properties properties = new Properties()
+//properties.load(project.rootProject.file('key.api.properties').newDataInputStream())
+//def kakaoApiKey = properties.getProperty('kakao.api.key')
+//def kakaoApiKeyRelease = properties.getProperty('kakao.api.key.release')
 
 android {
     compileSdkVersion 30
