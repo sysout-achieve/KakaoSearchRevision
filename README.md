@@ -1,4 +1,5 @@
 # KakaoSearchRevision
+![Build Status](https://travis-ci.org/sysout-achieve/KakaoSearchRevision.svg?branch=master) <br>
 kakao 도서 검색 프로젝트
 
 <br>
@@ -9,6 +10,7 @@ kakao 도서 검색 프로젝트
 - AAC(MVVM, DataBinding, LiveData, Navigation) <br>
 - Opensource: RxKotlin, RxBinding, Retrofit, Glide, Swiperefreshlayout <br>
 - Test : Unit Test(JUnit4), Ui Test
+- TravisCI
 
 <br>
 <hr>
