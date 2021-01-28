@@ -10,7 +10,7 @@ plugins {
  * Hide API keys
  */
 Properties properties = new Properties()
-properties.load(project.rootProject.file('key.api.properties').newDataInputStream())
+properties.load(project.rootProject.file('key.properties').newDataInputStream())
 def kakaoApiKey = properties.getProperty('kakao.api.key')
 //def kakaoApiKeyRelease = properties.getProperty('kakao.api.key.release')
 

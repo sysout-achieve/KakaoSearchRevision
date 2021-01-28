@@ -8,7 +8,6 @@ env:
     - ANDROID_BUILD_TOOLS_VERSION=30.0.3
     - ANDROID_ABI=armeabi-v7a
 
-
 android:
   components:
     - build-tools-30.0.3
@@ -33,9 +32,10 @@ cache:
     - $HOME/.gradle
 
 before_script:
+  - echo "kakao.api.key=\"$KAKAO_API_KEY\"" >> "$ANDROID_HOME/key.properties"
   - chmod +x gradlew
 
-script: sh gradle/build.sh
+script: ./gradlew clean build
 
 notifications:
   email: false
