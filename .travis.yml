@@ -32,10 +32,9 @@ cache:
     - $HOME/.gradle
 
 before_script:
-  - echo "kakao.api.key=\"$KAKAO_API_KEY\"" >> "$ANDROID_HOME/key.properties"
   - chmod +x gradlew
 
-script: ./gradlew clean build
+script: sh gradle/build.sh
 
 notifications:
   email: false
