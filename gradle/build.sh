@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 echo "kakao.api.key=\"$KAKAO_API_KEY\"" >> ../key.api.properties
-cd ..
+echo ls
 ./gradlew clean build
