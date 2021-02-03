@@ -1,11 +1,13 @@
 package com.gunt.kakaosearchrevision.ui
 
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.*
-import com.gunt.kakaosearchrevision.data.repository.BookRepository
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.gunt.kakaosearchrevision.data.domain.Book
+import com.gunt.kakaosearchrevision.data.repository.BookRepository
 import com.gunt.kakaosearchrevision.ui.recyclerview.BooksListAdapter
-import kotlinx.coroutines.*
+import kotlinx.coroutines.launch
 import kotlin.Exception
 
 class SearchListViewModel

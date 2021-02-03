@@ -17,9 +17,7 @@ object TextViewExtensions {
     fun getPriceStrWithCurrentUnit(price: Long): String {
         return "$price $PRICE_UNIT"
     }
-
 }
-
 
 enum class TextViewTheme(val fontSize: Float, val textColor: Int) {
     CLASSIC(20f, R.color.black),

@@ -3,8 +3,7 @@ package com.gunt.kakaosearchrevision.ui.recyclerview
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-
-abstract class EndlessRecyclerOnScrollListener (private val endlessCnt:Int): RecyclerView.OnScrollListener() {
+abstract class EndlessRecyclerOnScrollListener(private val endlessCnt: Int) : RecyclerView.OnScrollListener() {
     private var previousTotal = 0
     private var loading = true
 

@@ -17,11 +17,11 @@ class SearchListViewModelTest {
     @Before
     fun setUp() {
         val books: List<Book> = listOf(
-                Book(title = "title1"),
-                Book(title = "title2"),
-                Book(title = "title3"),
-                Book(title = "empty1"),
-                Book(title = "empty2")
+            Book(title = "title1"),
+            Book(title = "title2"),
+            Book(title = "title3"),
+            Book(title = "empty1"),
+            Book(title = "empty2")
         )
         searchListViewModel = SearchListViewModel(FakeBookRepository(bookList = books as MutableList<Book>))
     }
@@ -32,7 +32,7 @@ class SearchListViewModelTest {
         assertThat(searchListViewModel.search.page).isEqualTo(1)
 
         val field: Field =
-                searchListViewModel.javaClass.getDeclaredField("responseBook")
+            searchListViewModel.javaClass.getDeclaredField("responseBook")
         field.isAccessible = true
         val responseBook: List<Book> = field.get(searchListViewModel) as List<Book>
         assertThat(responseBook).hasSize(0)
@@ -40,60 +40,60 @@ class SearchListViewModelTest {
 
     @Test
     fun incrementPageTest() {
-        //given
+        // given
         val currentPage = searchListViewModel.search.page
         val method: Method = searchListViewModel.javaClass.getDeclaredMethod("incrementPage")
         method.isAccessible = true
 
-        //when
+        // when
         method.invoke(searchListViewModel)
 
-        //then
+        // then
         assertThat(searchListViewModel.search.page).isEqualTo(currentPage + 1)
     }
 
     @Test
     fun appendBookTest() {
-        //given
+        // given
         val books: List<Book> = listOf(
-                Book(title = "title1"),
-                Book(title = "title2"),
-                Book(title = "title3"),
-                Book(title = "empty1"),
-                Book(title = "empty2")
+            Book(title = "title1"),
+            Book(title = "title2"),
+            Book(title = "title3"),
+            Book(title = "empty1"),
+            Book(title = "empty2")
         )
         assertThat(searchListViewModel.responseBook).hasSize(0)
 
-        //when
+        // when
         searchListViewModel.appendBooks(books)
 
-        //then
+        // then
         assertThat(searchListViewModel.responseBook).hasSize(5)
     }
 
     @Test
     fun searchNewTest() = runBlockingTest {
-        //given
+        // given
         searchListViewModel.search.searchStr = "title"
 
-        //when
+        // when
         searchListViewModel.searchNew()
 
-        //then
+        // then
         assertThat(searchListViewModel.search.page).isEqualTo(1)
         assertThat(searchListViewModel.responseBook.size).isEqualTo(3)
     }
 
     @Test
     fun searchNextPageTest() = runBlockingTest {
-        //given
+        // given
         searchListViewModel.search.searchStr = "title"
         val expectedPage = searchListViewModel.search.page + 1
 
-        //when
+        // when
         searchListViewModel.searchNextPage()
 
-        //then
+        // then
         assertThat(searchListViewModel.search.page).isEqualTo(expectedPage)
         assertThat(searchListViewModel.responseBook.size).isNotEqualTo(0)
         assertThat(searchListViewModel.responseBook.size).isNotEqualTo(5)

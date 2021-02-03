@@ -5,7 +5,7 @@ import org.junit.runners.Suite
 
 @RunWith(Suite::class)
 @Suite.SuiteClasses(
-        BookDetailFragmentTest::class,
-        SearchListFragmentTest::class
+    BookDetailFragmentTest::class,
+    SearchListFragmentTest::class
 )
 class UiTestSuite

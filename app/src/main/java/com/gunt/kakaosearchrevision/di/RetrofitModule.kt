@@ -11,7 +11,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
-
 private const val BASE_URL = "https://dapi.kakao.com"
 
 const val KAKAO_API_KEY = BuildConfig.KAKAO_KEY
@@ -35,5 +34,4 @@ object RetrofitModule {
             .build()
             .create(BooksService::class.java)
     }
-
 }

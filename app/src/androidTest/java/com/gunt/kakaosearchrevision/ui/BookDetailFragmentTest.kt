@@ -18,14 +18,13 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-
 @RunWith(AndroidJUnit4::class)
 @HiltAndroidTest
 class BookDetailFragmentTest {
     @get:Rule
     var hiltRule = HiltAndroidRule(this)
 
-    lateinit var expectedBook:Book
+    lateinit var expectedBook: Book
 
     @Before
     fun setUp() {
@@ -38,7 +37,7 @@ class BookDetailFragmentTest {
 
     @Test
     fun fragmentInViewTest() {
-        //after created fragment
+        // after created fragment
         onView(withId(R.id.tv_title)).check(matches(withText(expectedBook.title)))
         onView(withId(R.id.tv_contents)).check(matches(withText(expectedBook.contents)))
         onView(withId(R.id.tv_author)).check(matches(withText(expectedBook.authors.toString())))
@@ -46,5 +45,4 @@ class BookDetailFragmentTest {
         onView(withId(R.id.tv_price)).check(matches(withText(TextViewExtensions.getPriceStrWithCurrentUnit(expectedBook.price))))
         onView(withId(R.id.tv_sale_price)).check(matches(withText(TextViewExtensions.getPriceStrWithCurrentUnit(expectedBook.sale_price))))
     }
-
 }

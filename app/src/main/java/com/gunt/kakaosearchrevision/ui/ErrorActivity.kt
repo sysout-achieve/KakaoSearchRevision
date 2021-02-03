@@ -1,8 +1,8 @@
 package com.gunt.kakaosearchrevision.ui
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.gunt.kakaosearchrevision.R
 import com.gunt.kakaosearchrevision.databinding.ActivityErrorBinding

@@ -37,28 +37,28 @@ class SearchListFragment : Fragment() {
     private lateinit var binding: FragmentSearchListBinding
     private val viewModel: SearchListViewModel by viewModels()
 
-    //구독하고 있는 Disposable 객체 일괄 관리용 객체(리소스 일괄 제어)
+    // 구독하고 있는 Disposable 객체 일괄 관리용 객체(리소스 일괄 제어)
     private var compositeDisposable = CompositeDisposable()
 
     private var recyclerViewClickListener =
-            object : OnRecyclerViewClickListener<Book> {
-                override fun onRecyclerViewClickListener(item: Book) {
-                    val action = SearchListFragmentDirections.listToDetail(item)
-                    findNavController().navigate(action)
-                }
+        object : OnRecyclerViewClickListener<Book> {
+            override fun onRecyclerViewClickListener(item: Book) {
+                val action = SearchListFragmentDirections.listToDetail(item)
+                findNavController().navigate(action)
             }
+        }
 
     private var recyclerViewEndScrollListener =
-            object : EndlessRecyclerOnScrollListener(REQUEST_ENDLESS_CNT) {
-                override fun onLoadMore() {
-                    binding.viewModel?.onTriggerEvent(BookListEvent.NextPageEvent)
-                }
+        object : EndlessRecyclerOnScrollListener(REQUEST_ENDLESS_CNT) {
+            override fun onLoadMore() {
+                binding.viewModel?.onTriggerEvent(BookListEvent.NextPageEvent)
             }
+        }
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_search_list, container, false)
         binding.setVariable(BR.viewModel, viewModel)
@@ -72,9 +72,12 @@ class SearchListFragment : Fragment() {
 
         binding.lifecycleOwner = this
 
-        viewModel.getLoading().observe(this.viewLifecycleOwner, Observer {
-            binding.layoutSwipeRefresh.isRefreshing = it
-        })
+        viewModel.getLoading().observe(
+            this.viewLifecycleOwner,
+            Observer {
+                binding.layoutSwipeRefresh.isRefreshing = it
+            }
+        )
 
         binding.btnSearch.setOnClickListener {
             viewModel.onTriggerEvent(BookListEvent.NewSearchEvent)
@@ -84,28 +87,28 @@ class SearchListFragment : Fragment() {
     }
 
     override fun onDestroyView() {
-        //화면 종료 시 Disposable 탐색 해제
+        // 화면 종료 시 Disposable 탐색 해제
         compositeDisposable.clear()
         super.onDestroyView()
     }
 
-    //자동 검색 기능 추가, 버튼 누르지 않고 검색
+    // 자동 검색 기능 추가, 버튼 누르지 않고 검색
     private fun setupSearchEditTextChangeListener() {
         val subscription: Disposable =
-                binding.editSearch.textChanges().debounce(200, TimeUnit.MILLISECONDS)
-                        .subscribeOn(Schedulers.io())
-                        .subscribeBy(
-                                onNext = {
-                                    viewModel.onTriggerEvent(BookListEvent.NewSearchEvent)
-                                    Log.d("kakao RX", "onNext $it")
-                                },
-                                onComplete = {
-                                    Log.d("kakao RX", "onComplete")
-                                },
-                                onError = {
-                                    Log.d("kakao RX", "onError : $it")
-                                }
-                        )
+            binding.editSearch.textChanges().debounce(200, TimeUnit.MILLISECONDS)
+                .subscribeOn(Schedulers.io())
+                .subscribeBy(
+                    onNext = {
+                        viewModel.onTriggerEvent(BookListEvent.NewSearchEvent)
+                        Log.d("kakao RX", "onNext $it")
+                    },
+                    onComplete = {
+                        Log.d("kakao RX", "onComplete")
+                    },
+                    onError = {
+                        Log.d("kakao RX", "onError : $it")
+                    }
+                )
         compositeDisposable.add(subscription)
     }
 

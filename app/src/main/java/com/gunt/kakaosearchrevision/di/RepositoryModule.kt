@@ -17,8 +17,8 @@ object RepositoryModule {
     @Singleton
     @Provides
     fun provideBookRepository(
-            booksService: BooksService,
-            bookDtoMapper: BookDtoMapper
+        booksService: BooksService,
+        bookDtoMapper: BookDtoMapper
     ): BookRepository {
         return BookRepositoryRemote(
             booksService = booksService,
